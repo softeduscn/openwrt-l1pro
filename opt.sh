@@ -18,13 +18,13 @@ wget  --no-check-certificate -c -q $kpath$kversion'.tar.gz' -O $kout'/'$kversion
 tar -xvf $kout'/'$kversion'.tar.gz' -C $kout
 mv $kout'/'$kversion $kout'/kernel'
 
-firmware="mk_s905d_n1.sh"
+firmware="mk_rk3328_l1pro.sh"
 file1='opt/openwrt_packit/make.env'
 file2='opt/openwrt_packit/'$firmware
 file3='opt/openwrt_packit/public_funcs'
-file4='opt/openwrt_packit/files/openwrt-update-rockchip'
-sed -i '/rootflags=compress/a\ramdisk_addr_r=0x06000000' $file4
-sed -i '/rootflags=compress/a\kernel_addr_r=0x02000000' $file4
+#file4='opt/openwrt_packit/files/openwrt-update-rockchip'
+#sed -i '/rootflags=compress/a\ramdisk_addr_r=0x06000000' $file4
+#sed -i '/rootflags=compress/a\kernel_addr_r=0x02000000' $file4
 kernel=$(ls opt/*/k*/boot*|cut -d'-' -f2-4|cut -d'.' -f1-3)
 kernel='KERNEL_VERSION="'$kernel'"'
 sed -i 'N;10i'$kernel $file1
