@@ -259,23 +259,31 @@ service_samba() {
 	echo "" >/etc/config/nfs
 	sed -i '/sambashare/,$d' /etc/config/samba4
 	if [ "$(uci_get_by_name $NAME $NAME samba 0)" == 0 ]; then
-		echolog "Samba stop....."
-		/etc/init.d/samba4 stop &
+		if [ -f /etc/init.d/samba4 ]; then
+			echolog "Samba stop....."
+			/etc/init.d/samba4 stop &
+		fi
 	fi
 	if [ "$(uci_get_by_name $NAME $NAME nfs 0)" == 0 ]; then
-		echolog "NFS stop......"
-		/etc/init.d/nfsd stop
-		/etc/init.d/nfs stop &
+		if [ -f /etc/init.d/nfsd ]; then
+			echolog "NFS stop......"
+			/etc/init.d/nfsd stop
+			/etc/init.d/nfs stop &
+		fi
 	else
 		/etc/init.d/nfsd start
 	fi
 	if [ "$(uci_get_by_name $NAME $NAME ftp 0)" == 0 ]; then
-		echolog "FTP stop......"
-		/etc/init.d/vsftpd stop &
+		if [ -f /etc/init.d/vsftpd ]; then
+			echolog "FTP stop......"
+			/etc/init.d/vsftpd stop &
+		fi
 	fi
 	if [ "$(uci_get_by_name $NAME $NAME minidlna 0)" == 0 ]; then
-		echolog "Minidlna stop......"
-		[ -f /etc/init.d/minidlna ] && /etc/init.d/minidlna stop &
+		if [ -f /etc/init.d/minidlna ]; then
+			echolog "Minidlna stop......"
+			/etc/init.d/minidlna stop &
+		fi
 	fi
 	syssd=$(ls -F $syspath|grep '/$'| grep 'sd[a-z][1-9]')
 	[ "$syssd" == "" ] && {
