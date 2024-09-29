@@ -9,7 +9,6 @@ api:
 include: []
 
 plugins:
-
   # 自定义hosts
   - tag: localhosts
     type: hosts
@@ -36,8 +35,8 @@ plugins:
     type: domain_set
     args:
       files:
-        - "/var/mosdns/geosite_geolocation-!cn.txt"      
-        
+        - "/var/mosdns/geosite_geolocation-!cn.txt"
+
   # 缓存
   - tag: lazy_cache
     type: cache
@@ -46,7 +45,7 @@ plugins:
       lazy_cache_ttl: 86400
       dump_file: "/etc/mosdns/cache.dump"
       dump_interval: 600
-    
+
   # 转发至本地服务器
   - tag: forward_local
     type: forward
@@ -63,7 +62,7 @@ plugins:
       upstreams:
         - addr: tls://8.8.8.8:853
           enable_pipeline: true
-          
+
   # 国内解析
   - tag: local_sequence
     type: sequence
