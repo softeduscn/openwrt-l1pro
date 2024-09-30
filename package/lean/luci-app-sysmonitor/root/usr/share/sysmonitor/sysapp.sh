@@ -90,7 +90,7 @@ firstrun(){
 	#touch /tmp/samba.sign
 	echo "3=$APP_PATH/sysapp.sh service_samba &" >> /tmp/delay.sign
 	echo "60=$APP_PATH/sysapp.sh set_static" >> /tmp/delay.sign
-	echo "300=ntpd -n -q -p ntp.aliyun.com" >> /tmp/delay.sign
+	echo "90=ntpd -n -q -p ntp.aliyun.com" >> /tmp/delay.sign
 	echo 0 > /tmp/vpn_status
 	getip
 	uci del network.utun

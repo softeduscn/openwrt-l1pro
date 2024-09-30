@@ -15,7 +15,7 @@ plugins:
     args:
      files:
         - "/etc/mosdns/rule/hosts.txt"
-     
+
   # 国内域名
   - tag: geosite_cn
     type: domain_set
@@ -35,8 +35,8 @@ plugins:
     type: domain_set
     args:
       files:
-        - "/var/mosdns/geosite_geolocation-!cn.txt"
-
+        - "/var/mosdns/geosite_geolocation-!cn.txt"      
+        
   # 缓存
   - tag: lazy_cache
     type: cache
@@ -62,6 +62,8 @@ plugins:
       upstreams:
         - addr: tls://8.8.8.8:853
           enable_pipeline: true
+        - addr: tcp://8.8.4.4
+        - addr: tcp://1.1.1.1
 
   # 国内解析
   - tag: local_sequence
@@ -120,7 +122,7 @@ plugins:
     args:
       - matches: qname $geosite_no_cn
         exec: $remote_sequence
-     
+
   # 主要的运行逻辑插件
   # sequence 插件中调用的插件 tag 必须在 sequence 前定义，
   # 否则 sequence 找不到对应插件。
@@ -134,7 +136,7 @@ plugins:
       - exec: $query_is_no_local_domain
       - exec: jump has_resp_sequence
       - exec: $fallback
-        
+
   # 启动 udp 服务器。
   - tag: udp_server
     type: udp_server

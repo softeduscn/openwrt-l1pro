@@ -19,7 +19,7 @@ config sysmonitor 'sysmonitor'
 	option nextvpntime '6'
 	option passwall '1'
 	option firmware 'https://github.com/softeduscn/openwrt-l1pro/releases/download/ARMv8/openwrt_rk3328_l1pro.img.gz'
-	list dnslist '192.168.1.1'	
+	list dnslist '119.29.29.29'	
 	option smartdnsAD '0'
 	option samba '1'
 	option samba_rw '0'
@@ -125,14 +125,14 @@ config prog_list
 
 config prog_list
 	option program 'smartdns_update'
-	option cycle '600'
+	option cycle '300'
 	option path '/usr/share/sysmonitor/sysapp.sh'
 	option first '180'
 	option name '更新SmartDNS数据'
 	
 config prog_list
 	option program 'mosdns_update'
-	option cycle '600'
+	option cycle '300'
 	option path '/usr/share/sysmonitor/sysapp.sh'
 	option first '180'
 	option name '更新MosDNS数据'
