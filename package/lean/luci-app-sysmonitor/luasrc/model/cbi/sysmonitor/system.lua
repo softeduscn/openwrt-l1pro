@@ -17,11 +17,6 @@ s.anonymous = true
 --o.rmempty=false
 
 --[[
-if nixio.fs.access("/etc/init.d/ddns") then
-o=s:option(Flag,"ddns", translate("DDNS Enable"))
-o.rmempty=false
-end
-
 o = s:option(Value, "vpn", translate("Select VPN"))
 if nixio.fs.access("/etc/init.d/openclash") then
 o:value("Openclash")
@@ -50,10 +45,10 @@ o:value("NULL", translate("NULL"))
 o.default = "MosDNS"
 o.rmempty = false
 
-o = s:option(Value, "smartdnsPORT", translate("SmartDNS PORT"))
-o:value("6053")
-o.default = "6053"
-o:depends("dns", "SmartDNS")
+--o = s:option(Value, "smartdnsPORT", translate("SmartDNS PORT"))
+--o:value("6053")
+--o.default = "6053"
+--o:depends("dns", "SmartDNS")
 --]]
 
 o = s:option(Value, "gateway", translate("Gateway Address"))
