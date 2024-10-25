@@ -1,9 +1,15 @@
 #!/bin/sh
 
+HOSTNAME='NAS'
 uci set fstab.@global[0].anon_mount='1'
 uci commit fstab
 
-uci set system.@system[0].hostname='NAS'
+sed -i '/NAS/d' /etc/hosts
+sed -i '/nas/d' /etc/hosts
+echo '127.0.0.1 '$HOSTNAME >> /etc/hosts
+echo '127.0.0.1 '$HOSTNAME|tr A-Z a-z  >> /etc/hosts
+
+uci set system.@system[0].hostname=$HOSTNAME
 uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
 uci commit system
@@ -337,6 +343,12 @@ server.username := ""
 server.groupname := ""
 EOF
 }
+
+uci set samba4.@samba[0].enable_extra_tuning=1
+uci set samba4.@samba[0].disable_async_io=1
+uci set samba4.@samba[0].macos=1
+uci set samba4.@samba[0].allow_legacy_protocols=1
+uci commit samba4
 
 [ -f /etc/init.d/samba4 ] && {
 file='/etc/samba/smb.conf.template'
