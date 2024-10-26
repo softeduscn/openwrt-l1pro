@@ -197,4 +197,3 @@ while [ "1" == "1" ]; do
 	[ "$(cat /tmp/chkvpn.pid)" -gt 1 ] && sys_exit
 	sleep 1
 done
-
